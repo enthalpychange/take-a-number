@@ -1,0 +1,11 @@
+# Local development database
+*.sqlite3
+
+# Python
+__pycache__/
+
+# Visual Studio Code
+.vscode/
+
+# Environment
+.env
