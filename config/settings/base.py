@@ -20,6 +20,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
+    'tan.identity.apps.IdentityConfig',
     'tan.tracker.apps.TrackerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,6 +71,7 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'identity.Identity'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
