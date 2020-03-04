@@ -24,7 +24,7 @@ class Process(TimeStampedModel):
         REOPENED = 'RO', 'Reopened'
 
     name = models.CharField(max_length=255)
-    creator = models.ForeignKey(Identity, on_delete=models.CASCADE)
+    creator = models.ForeignKey(Identity, on_delete=models.PROTECT)
     ended = models.DateTimeField(null=True, default=None)
     status = models.CharField(
         max_length=2,
