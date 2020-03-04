@@ -24,7 +24,12 @@ class Process(TimeStampedModel):
         REOPENED = 'RO', 'Reopened'
 
     name = models.CharField(max_length=255)
-    creator = models.ForeignKey(Identity, on_delete=models.PROTECT)
+    creator = models.ForeignKey(
+        Identity,
+        on_delete=models.PROTECT,
+        related_name='%(app_label)s_%(class)s_creator',
+        related_query_name='%(app_label)s_%(class)ss',
+    )
     ended = models.DateTimeField(null=True, default=None)
     status = models.CharField(
         max_length=2,
