@@ -25,6 +25,7 @@ class Process(TimeStampedModel):
 
     name = models.CharField(max_length=255)
     creator = models.ForeignKey(Identity, on_delete=models.CASCADE)
+    ended = models.DateTimeField(null=True, default=None)
     status = models.CharField(
         max_length=2,
         choices=Statuses.choices,
