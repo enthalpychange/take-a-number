@@ -27,8 +27,8 @@ class Process(TimeStampedModel):
     creator = models.ForeignKey(
         Identity,
         on_delete=models.PROTECT,
-        related_name='%(app_label)s_%(class)s_creator',
-        related_query_name='%(app_label)s_%(class)ss',
+        related_name='creator_set',
+        related_query_name='creator',
     )
     ended = models.DateTimeField(null=True, default=None)
     status = models.CharField(

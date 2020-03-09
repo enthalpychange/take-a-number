@@ -14,22 +14,21 @@ class Queue(models.Model):
     groups = models.ManyToManyField(Group)
 
 
-class BaseIncident(Process):
-    """Abstract base model for incidents.
+class Incident(Process):
+    """Incident model.
     """
+    description = models.TextField()
     owner = models.ForeignKey(
         Identity,
         null=True,
         on_delete=models.PROTECT,
-        related_name='%(app_label)s_%(class)s_owner',
-        related_query_name='%(app_label)s_%(class)ss',
+        related_name='owner_set',
+        related_query_name='owner',
     )
     queue = models.ForeignKey(
         Queue,
         null=True,
         on_delete=models.PROTECT,
-        related_name='%(app_label)s_%(class)s_queue',
-        related_query_name='%(app_label)s_%(class)ss',
     )
     resolution = models.TextField()
     resolved = models.DateTimeField(null=True, default=None)
@@ -37,21 +36,14 @@ class BaseIncident(Process):
         Identity,
         null=True,
         on_delete=models.PROTECT,
-        related_name='%(app_label)s_%(class)s_resolver',
-        related_query_name='%(app_label)s_%(class)ss',
+        related_name='resolver_set',
+        related_query_name='resolver',
     )
-
-    class Meta:
-        abstract = True
-        permissions = [
-            ('can_work_incidents', 'Can work incidents'),
-        ]
-
-
-class Incident(BaseIncident):
-    """Simple incident.
-    """
-    description = models.TextField()
 
     def get_absolute_url(self):
         return reverse('tracker:incident-detail', kwargs={'pk': self.pk})
+
+    class Meta:
+        permissions = [
+            ('can_work_incidents', 'Can work incidents'),
+        ]
