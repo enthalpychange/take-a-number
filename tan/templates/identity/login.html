@@ -1,5 +1,29 @@
-<form action="{% url 'identity:login' %}" method="post">
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{# No navbar on this page #}
+{% block fixed_navbar_css %}
+{% endblock fixed_navbar_css %}
+
+{% block styles %}
+<link href="{% static 'css/login.css' %}" rel="stylesheet">
+{% endblock styles %}
+
+{# No navbar on this page #}
+{% block navbar %}
+{% endblock navbar %}
+
+{%block content %}
+<div class="text-center">
+  <form class="form-signin" action="{% url 'identity:login' %}" method="post">
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
+    {% bootstrap_form_errors form type='non_fields' %}
+    {% bootstrap_field form.username label_class='sr-only' field_class='form-control' placeholder='Username' %}
+    {% bootstrap_field form.password label_class='sr-only' field_class='form-control' %}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
+</div>
+{% endblock content %}

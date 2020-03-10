@@ -4,10 +4,10 @@
 
 {% block content %}
 <form action="{% url 'tracker:incident-create' %}" method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-    <button type="submit" class="btn btn-primary">Submit</button>
-    {% endbuttons %}
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% buttons %}
+  <button type="submit" class="btn btn-primary">Submit</button>
+  {% endbuttons %}
 </form>
 {% endblock content %}
