@@ -5,6 +5,10 @@ from django.views.generic import (
     DetailView,
 )
 
+from .forms import (
+    IncidentCreateForm,
+)
+
 from .models import (
     Incident,
 )
@@ -12,10 +16,7 @@ from .models import (
 
 class IncidentCreateView(LoginRequiredMixin, CreateView):
     model = Incident
-    fields = [
-        'name',
-        'description',
-    ]
+    form_class = IncidentCreateForm
 
     # https://docs.djangoproject.com/en/dev/topics/class-based-views/generic-editing/#models-and-request-user
     def form_valid(self, form):

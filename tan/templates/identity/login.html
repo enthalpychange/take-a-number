@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load bootstrap4 %}
+{% load crispy_forms_tags %}
 
 {# No navbar on this page #}
-{% block fixed_navbar_css %}
-{% endblock fixed_navbar_css %}
+{% block navbar_css %}
+{% endblock navbar_css %}
 
-{% block styles %}
+{% block stylesheets %}
+{{ block.super }}
 <link href="{% static 'css/login.css' %}" rel="stylesheet">
-{% endblock styles %}
+{% endblock stylesheets %}
 
 {# No navbar on this page #}
 {% block navbar %}
@@ -16,13 +17,19 @@
 
 {%block content %}
 <div class="text-center">
-  <form class="form-signin" action="{% url 'identity:login' %}" method="post">
-    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+  <form action="{% url 'identity:login' %}" method="POST" class="form-signin">
     {% csrf_token %}
-    {% bootstrap_form_errors form type='non_fields' %}
-    {% bootstrap_field form.username label_class='sr-only' field_class='form-control' placeholder='Username' %}
-    {% bootstrap_field form.password label_class='sr-only' field_class='form-control' %}
+    <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <strong>Invalid credentials</strong>
+        </div>
+    {% endif %}
+    <label for="username" class="sr-only">Username</label>
+    <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
   </form>
 </div>
