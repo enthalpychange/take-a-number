@@ -17,7 +17,8 @@
 
 {%block content %}
 <div class="text-center">
-  <form action="{% url 'identity:login' %}" method="POST" class="form-signin">
+  {# Pass next parameter to redirect back to the original page after login #}
+  <form action="{% url 'identity:login' %}?next={{ request.GET.next }}" method="POST" class="form-signin">
     {% csrf_token %}
     <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
