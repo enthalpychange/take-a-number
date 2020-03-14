@@ -47,6 +47,12 @@ class IncidentListView(LoginRequiredMixin, ListView):
 
 class IncidentDetailView(LoginRequiredMixin, DetailView):
     model = Incident
+    context_object_name = 'incident'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.select_related()
+        return queryset
 
 
 class IndexView(LoginRequiredMixin, TemplateView):

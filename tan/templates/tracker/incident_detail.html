@@ -1,2 +1,56 @@
-<h1>{{ object.name }}</h1>
-<p>{{ object.description }}</p>
+{% extends 'modals.html' %}
+
+{% block content %}
+<div class="container p-2">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm">
+          <table class="table table-striped mt-0 mb-0">
+            <thead class="thead-dark">
+              <tr>
+                <th colspan="4">Incident Details</th>
+              </tr>
+            </thead>
+            <tr>
+              <th>Subject</th>
+              <td>{{ incident.name }}</td>
+              <th>Creation Date</th>
+              <td>{{ incident.created }}</td>
+            </tr>
+            <tr>
+              <th>Submitter</th>
+              <td>{{ incident.creator.identifier }}</td>
+              <th>Resolution Date</th>
+              <td>{% if incident.resolved %}{{ incident.resolved }}{% else %}Not Resolved{% endif %}</td>
+            </tr>
+            <tr>
+              <th>Owner</th>
+              <td>{% if incident.owner %}{{ incident.owner.identifier }}{% else %}Not Assigned{% endif %}</td>
+              <th>Status</th>
+              <td>{{ incident.get_status_display }}</td>
+            </tr>
+          </table>
+        </div>
+      </div> <!-- /row -->
+    </div> <!-- /card-body -->
+  </div> <!-- /card -->
+</div>
+
+<div class="container p-2">
+  <div class="card">
+    <div class="card-body">
+      <table class="table mt-0 mb-0">
+        <thead class="thead-dark">
+          <tr>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>{{ incident.description | linebreaks }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
