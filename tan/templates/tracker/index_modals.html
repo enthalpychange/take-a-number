@@ -1,0 +1,15 @@
+{% comment %}
+
+Modal dialog boxes
+
+{% endcomment %}
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $(".incident-create").modalForm({
+      formURL: "{% url 'tracker:incident-create' %}"
+    });
+
+  });
+</script>
