@@ -24,3 +24,20 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+LOCAL_APPS = [
+    'debug_toolbar',
+]
+
+INSTALLED_APPS += LOCAL_APPS # noqa
+
+LOCAL_MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+MIDDLEWARE += LOCAL_MIDDLEWARE # noqa
+
+# 127.0.0.1 required for debug toolbar
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
