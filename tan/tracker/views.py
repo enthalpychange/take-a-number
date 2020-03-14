@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import (
     TemplateView,
     DetailView,
+    ListView,
 )
 
 from bootstrap_modal_forms.generic import BSModalCreateView
@@ -37,6 +38,11 @@ class IncidentCreateView(LoginRequiredMixin, BSModalCreateView):
             return self.success_message % {'ticket_number': f'{incident_id:07}'}
         else:
             return 'Success!'
+
+
+class IncidentListView(LoginRequiredMixin, ListView):
+    model = Incident
+    context_object_name = 'incidents'
 
 
 class IncidentDetailView(LoginRequiredMixin, DetailView):

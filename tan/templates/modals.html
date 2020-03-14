@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block javascript %}
+{{ block.super }}
+<!-- Django Bootstrap Modal Forms -->
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+{% endblock javascript %}
