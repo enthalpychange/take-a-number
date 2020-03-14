@@ -1,0 +1,4 @@
+/* Make the padding around the jumbotron smaller */
+.jumbotron {
+  padding: 1rem 0.5rem;
+}
