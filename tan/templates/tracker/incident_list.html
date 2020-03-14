@@ -1,22 +1,30 @@
 {% extends 'datatables.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container p-2">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Incidents</h5>
       <table id="incidents_table" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>Ticket Number</th>
-                <th>Name</th>
+                <th>Number</th>
+                <th>Subject</th>
+                <th>Submitter</th>
+                <th>Creation Date</th>
+                <th>Owner</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
           {% for incident in incidents %}
             <tr>
-                <td><a href="{% url 'tracker:incident-detail' incident.id %}">{{ incident.id }}</a></td>
+                <td><a href="{% url 'tracker:incident-detail' incident.id %}" target="_blank">{{ incident.id }}</a></td>
                 <td>{{ incident.name }}</td>
+                <td>{{ incident.creator }}</td>
+                <td>{{ incident.created | date:"Y-m-d H:i:s" }}</td>
+                <td>{{ incident.owner }}</td>
+                <td>{{ incident.get_status_display }}</td>
             </tr>
             {% endfor %}
         </tbody>
