@@ -4,13 +4,21 @@
 {% block content %}
 <main role="main">
 
+    <!-- Modal form -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+    
+        </div>
+      </div>
+    </div>
+
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam iaculis rhoncus iaculis. Nulla facilisi. Integer pharetra leo quis sapien imperdiet aliquam. Integer nulla risus, ultricies gravida dui sit amet, porta condimentum quam. Ut ut varius sem, et ultrices ligula. Integer posuere vitae justo quis mattis. Ut ac tempus orci. Duis suscipit, eros sit amet ultrices auctor, quam justo auctor nulla, vitae vestibulum est risus eu magna. Aliquam condimentum vehicula magna, non consectetur elit vulputate vel. Morbi convallis diam quis sem imperdiet faucibus. Nulla vehicula, elit ac semper eleifend, neque est ultrices sem, et ullamcorper diam magna ut tortor. Quisque ornare odio velit, a sodales turpis commodo eu. Suspendisse potenti.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+      <div class="container text-center">
+        <h1>Welcome to the ticketing system!</h1>
+        <p>Need help? Take a number by opening a ticket!</p>
+        <p><button class="incident-create btn btn-primary btn-lg" type="button" name="button">Open Ticket</button></p>
       </div>
     </div>
 
@@ -40,3 +48,17 @@
 
 </main>
 {% endblock content %}
+
+{% block javascript %}
+{{ block.super }}
+<!--<script src="{% static 'js/modals.js' %}"></script>-->
+<script type="text/javascript">
+  $(document).ready(function() {
+  
+      $(".incident-create").modalForm({
+          formURL: "{% url 'tracker:incident-create' %}"
+      });
+  
+  });
+  </script>
+{% endblock javascript %}

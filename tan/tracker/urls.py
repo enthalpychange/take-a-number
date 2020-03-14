@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import (
-    index,
+    IndexView,
     IncidentCreateView,
     IncidentDetailView,
 )
@@ -9,7 +9,7 @@ from .views import (
 app_name = 'tracker'
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', IndexView.as_view(), name='index'),
     path('incidents/<int:pk>/', IncidentDetailView.as_view(), name='incident-detail'),
     path('incidents/create/', IncidentCreateView.as_view(), name='incident-create'),
 ]

@@ -1,9 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import (
-    CreateView,
+    TemplateView,
     DetailView,
 )
+
+from bootstrap_modal_forms.generic import BSModalCreateView
 
 from .forms import (
     IncidentCreateForm,
@@ -14,9 +16,11 @@ from .models import (
 )
 
 
-class IncidentCreateView(LoginRequiredMixin, CreateView):
+class IncidentCreateView(LoginRequiredMixin, BSModalCreateView):
     model = Incident
     form_class = IncidentCreateForm
+    success_message = 'IT IS FINE'
+    success_url = reverse_lazy('tracker:index')
 
     # https://docs.djangoproject.com/en/dev/topics/class-based-views/generic-editing/#models-and-request-user
     def form_valid(self, form):
@@ -28,5 +32,5 @@ class IncidentDetailView(LoginRequiredMixin, DetailView):
     model = Incident
 
 
-def index(request):
-    return render(request, 'tracker/index.html')
+class IndexView(LoginRequiredMixin, TemplateView):
+    template_name = 'tracker/index.html'

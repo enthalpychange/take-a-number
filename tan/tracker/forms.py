@@ -1,20 +1,17 @@
-from django.forms import ModelForm
+from django.forms import Textarea
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from bootstrap_modal_forms.forms import BSModalForm
 
 from .models import Incident
 
 
-class IncidentCreateForm(ModelForm):
+class IncidentCreateForm(BSModalForm):
     class Meta:
         model = Incident
         fields = [
             'name',
             'description',
         ]
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.add_input(Submit('submit', 'Submit'))
+        widgets = {
+            'description': Textarea(attrs={'rows': 3})
+        }
