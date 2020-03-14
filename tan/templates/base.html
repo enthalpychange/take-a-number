@@ -25,11 +25,28 @@
   </head>
 
   <body>
+    <!-- Navbar Block -->
     <div>
       {% block navbar %}
       {% include "navbar.html" %}
       {% endblock navbar %}
     </div>
+
+    <!-- Messages Block -->
+    <div>
+      {% if messages %}
+        {% for message in messages %}
+          <div style="border-radius:0;" {% if message.tags %} class="alert alert-icon alert-{{ message.tags }} alert-dismissible fade show mb-0" role="alert" {% endif %}>
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Dismiss">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- Content Block -->
     <div>
       {% block content %}
       <h1>base.html content block</h1>
