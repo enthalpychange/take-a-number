@@ -1,3 +1,16 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import (
+    Incident,
+    Queue,
+)
+
+
+@admin.register(Incident)
+class IncidentAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Queue)
+class QueueAdmin(admin.ModelAdmin):
+    pass

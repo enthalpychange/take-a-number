@@ -6,12 +6,17 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item {% if request.resolver_match.view_name == 'tracker:index' %}active{% endif %}">
+        <a class="nav-link" href="{% url 'tracker:index' %}">Home</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item {% if request.resolver_match.view_name == 'tracker:incident-list' %}active{% endif %}">
         <a class="nav-link" href="{% url 'tracker:incident-list' %}">Tickets</a>
       </li>
+      {% if perms.admin %}
+      <li class="nav-item {% if request.resolver_match.app_name == 'admin' %}active{% endif %}">
+        <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+      </li>
+      {% endif %}
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>

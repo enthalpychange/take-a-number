@@ -13,6 +13,9 @@ class Queue(models.Model):
     name = models.CharField(max_length=255)
     groups = models.ManyToManyField(Group)
 
+    def __str__(self):
+        return self.name
+
 
 class Incident(Process):
     """Incident model.
@@ -42,6 +45,9 @@ class Incident(Process):
 
     def get_absolute_url(self):
         return reverse('tracker:incident-detail', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         permissions = [

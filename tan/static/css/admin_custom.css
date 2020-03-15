@@ -1,0 +1,17 @@
+/* Custom CSS to override Django admin styles */
+ul li {
+  list-style-type: revert;
+  padding: revert;
+}
+
+li, dt, dd {
+  font-size: 1rem;
+}
+
+caption {
+  caption-side: top;
+}
+
+.navbar-brand {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}

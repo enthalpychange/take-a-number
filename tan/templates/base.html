@@ -12,13 +12,11 @@
     <title>{% block title %}base.html{% endblock %}</title>
     
     {% block stylesheets %}
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous" />
+    {% include "include/bootstrap_css.html" %}
     {% endblock stylesheets %}
 
     {% block navbar_css %}
-    <!-- Fixed navbar CSS -->
-    <link href="{% static 'css/fixed_navbar.css' %}" rel="stylesheet">
+    {% include "include/fixed_navbar_css.html" %}
     {% endblock navbar_css %}
   </head>
 
@@ -26,7 +24,7 @@
     <!-- Navbar Block -->
     <div>
       {% block navbar %}
-      {% include "navbar.html" %}
+      {% include "include/navbar.html" %}
       {% endblock navbar %}
     </div>
 
@@ -52,12 +50,7 @@
     </div>
 
     {% block javascript %}
-    <!-- JQuery JavaScript-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <!-- Popper JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha256-/ijcOLwFf26xEYAjW75FizKVo5tnTYiQddPZoLUHHZ8=" crossorigin="anonymous"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
+    {% include 'include/bootstrap_javascript.html' %}
     {% endblock javascript %}
   </body>
 </html>
