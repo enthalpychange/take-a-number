@@ -20,10 +20,11 @@ class Queue(models.Model):
 class Incident(Process):
     """Incident model.
     """
-    description = models.TextField()
+    description = models.TextField(blank=True)
     owner = models.ForeignKey(
         Identity,
         null=True,
+        blank=True,
         on_delete=models.PROTECT,
         related_name='owner_set',
         related_query_name='owner',
@@ -31,13 +32,15 @@ class Incident(Process):
     queue = models.ForeignKey(
         Queue,
         null=True,
+        blank=True,
         on_delete=models.PROTECT,
     )
-    resolution = models.TextField()
-    resolved = models.DateTimeField(null=True, default=None)
+    resolution = models.TextField(blank=True)
+    resolved = models.DateTimeField(null=True, blank=True)
     resolver = models.ForeignKey(
         Identity,
         null=True,
+        blank=True,
         on_delete=models.PROTECT,
         related_name='resolver_set',
         related_query_name='resolver',

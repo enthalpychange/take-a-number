@@ -16,6 +16,10 @@ from .models import (
     Incident,
 )
 
+from .selectors import (
+    get_incident,
+)
+
 
 class IncidentCreateView(LoginRequiredMixin, BSModalCreateView):
     model = Incident
@@ -44,15 +48,16 @@ class IncidentListView(LoginRequiredMixin, ListView):
     model = Incident
     context_object_name = 'incidents'
 
+    def get_queryset(self):
+        return get_incident()
+
 
 class IncidentDetailView(LoginRequiredMixin, DetailView):
     model = Incident
     context_object_name = 'incident'
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.select_related()
-        return queryset
+        return get_incident()
 
 
 class IndexView(LoginRequiredMixin, TemplateView):

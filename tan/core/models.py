@@ -1,7 +1,5 @@
 from django.db import models
 
-from tan.identity.models import Identity
-
 
 class TimeStampedModel(models.Model):
     """Abstract base class model for created and modified timestamps.
@@ -25,12 +23,12 @@ class Process(TimeStampedModel):
 
     name = models.CharField(max_length=255)
     creator = models.ForeignKey(
-        Identity,
+        'identity.Identity',
         on_delete=models.PROTECT,
         related_name='creator_set',
         related_query_name='creator',
     )
-    ended = models.DateTimeField(null=True, default=None)
+    ended = models.DateTimeField(null=True, blank=True, default=None)
     status = models.CharField(
         max_length=2,
         choices=Statuses.choices,

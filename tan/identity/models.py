@@ -2,6 +2,8 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
+from tan.core.models import TimeStampedModel
+
 
 class IdentityManager(BaseUserManager):
 
@@ -36,3 +38,30 @@ class Identity(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'identifier'
     EMAIL_FIELD = 'identifier'
     REQUIRED_FIELDS = []
+
+
+class Location(TimeStampedModel):
+    name = models.CharField(max_length=256, unique=True, null=True)
+    street = models.CharField(max_length=512, blank=True, verbose_name='Street Address')
+    post_office_box = models.CharField(max_length=256, blank=True, verbose_name='PO Box')
+    city = models.CharField(max_length=256, blank=True)
+    state = models.CharField(max_length=256, blank=True, verbose_name='State/Province')
+    country = models.CharField(max_length=256, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class UserProfile(TimeStampedModel):
+    identifier = models.OneToOneField(Identity, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=256, blank=True)
+    middle_name = models.CharField(max_length=256, blank=True)
+    last_name = models.CharField(max_length=256, blank=True)
+    office = models.CharField(max_length=256, blank=True)
+    phone_number = models.CharField(max_length=256, blank=True)
+    mobile_number = models.CharField(max_length=256, blank=True)
+    title = models.CharField(max_length=256, blank=True)
+    location = models.ForeignKey(Location, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return ' '.join([self.first_name, self.last_name])

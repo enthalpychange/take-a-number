@@ -33,7 +33,7 @@ from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX, identify_hasher
 from django.utils.translation import gettext
 
-from .models import Identity
+from .models import Identity, Location, UserProfile
 
 
 class ReadOnlyPasswordHashWidget(forms.Widget):
@@ -119,6 +119,7 @@ class IdentityChangeForm(forms.ModelForm):
         return self.initial['password']
 
 
+@admin.register(Identity)
 class IdentityAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = IdentityChangeForm
@@ -147,4 +148,11 @@ class IdentityAdmin(BaseUserAdmin):
     filter_horizontal = ()
 
 
-admin.site.register(Identity, IdentityAdmin)
+@admin.register(Location)
+class LocationAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    pass

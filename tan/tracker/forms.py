@@ -15,3 +15,8 @@ class IncidentCreateForm(BSModalForm):
         widgets = {
             'description': Textarea(attrs={'rows': 3})
         }
+
+    def save(self, commit=True):
+        incident = super().save(commit=commit)
+        # Business logic on incident creation
+        return incident
