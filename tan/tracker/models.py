@@ -20,6 +20,7 @@ class Queue(models.Model):
 class Incident(Process):
     """Incident model.
     """
+    name = models.CharField(max_length=255, verbose_name='Subject')
     description = models.TextField(blank=True)
     owner = models.ForeignKey(
         Identity,

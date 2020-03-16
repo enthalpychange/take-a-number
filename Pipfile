@@ -6,6 +6,8 @@ verify_ssl = true
 [dev-packages]
 flake8 = "*"
 django-debug-toolbar = "*"
+faker = "*"
+factory_boy = "*"
 
 [packages]
 django = "*"
