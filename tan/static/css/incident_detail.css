@@ -1,0 +1,7 @@
+/* Incident Details Table */
+
+/* Table headers fit contents */
+table.table-fit tbody th {
+  width: 1%;
+  white-space: nowrap;
+}
