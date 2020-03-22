@@ -21,9 +21,9 @@
             <tr>
                 <td><a href="{% url 'tracker:incident-detail' incident.id %}" target="_blank">{{ incident.id }}</a></td>
                 <td>{{ incident.name }}</td>
-                <td>{{ incident.creator }}</td>
+                <td>{{ incident.creator.userprofile.first_name }} {{ incident.creator.userprofile.last_name }}</td>
                 <td>{{ incident.created | date:"Y-m-d H:i:s" }}</td>
-                <td>{{ incident.owner }}</td>
+                <td>{{ incident.owner.userprofile.first_name }} {{ incident.owner.userprofile.last_name }}</td>
                 <td>{{ incident.get_status_display }}</td>
             </tr>
             {% endfor %}

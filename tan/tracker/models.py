@@ -55,5 +55,5 @@ class Incident(Process):
 
     class Meta:
         permissions = [
-            ('can_work_incidents', 'Can work incidents'),
+            ('work_incident', 'Can work incident'),
         ]

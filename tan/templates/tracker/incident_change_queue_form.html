@@ -1,7 +1,7 @@
 {% load crispy_forms_field %}
 
 {# Debug toolbar requires html and body elements #}
-{% if request.resolver_match.view_name == 'tracker:incident-create-debug' %}
+{% if request.resolver_match.view_name == 'tracker:incident-change-queue-debug' %}
 <html><body>
 {% endif %}
 
@@ -9,7 +9,7 @@
   {% csrf_token %}
 
  <div class="modal-header">
-    <h5 class="modal-title">Create Ticket</h5>
+    <h5 class="modal-title">Change Queue</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -34,6 +34,6 @@
 </form>
 
 {# Debug toolbar requires html and body elements #}
-{% if request.resolver_match.view_name == 'tracker:incident-create-debug' %}
+{% if request.resolver_match.view_name == 'tracker:incident-change-queue-debug' %}
 </body></html>
 {% endif %}

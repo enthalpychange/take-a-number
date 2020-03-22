@@ -16,6 +16,7 @@ class Process(TimeStampedModel):
     """
     class Statuses(models.TextChoices):
         SUBMITTED = 'SM', 'Submitted'
+        ENQUEUED = 'EQ', 'Enqueued'
         ASSIGNED = 'AS', 'Assigned'
         RESOLVED = 'RS', 'Resolved'
         CLOSED = 'CL', 'Closed',
