@@ -59,6 +59,7 @@ class IncidentCreateView(LoginRequiredMixin, BSModalCreateView):
 class IncidentListView(LoginRequiredMixin, ListView):
     model = Incident
     context_object_name = 'incidents'
+    paginate_by = 100
 
     def get_queryset(self):
         return get_incident()
