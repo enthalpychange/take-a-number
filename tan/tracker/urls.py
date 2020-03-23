@@ -29,8 +29,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        path('incidents/<int:pk>/change-queue-debug', QueueChangeView.as_view(), name='incident-change-queue-debug'),
-        path('incidents/<int:pk>/change-owner-debug', OwnerChangeView.as_view(), name='incident-change-owner-debug'),
-        path('incidents/create-debug/', IncidentCreateView.as_view(), name='incident-create-debug'),
-        path('incidents/<int:pk>/resolve-debug', ResolveView.as_view(), name='incident-resolve-debug'),
+        path('incidents/<int:pk>/change-queue-debug', QueueChangeView.as_view(), {'debug_view': True}, name='incident-change-queue-debug'), # noqa
+        path('incidents/<int:pk>/change-owner-debug', OwnerChangeView.as_view(), {'debug_view': True}, name='incident-change-owner-debug'), # noqa
+        path('incidents/create-debug/', IncidentCreateView.as_view(), {'debug_view': True}, name='incident-create-debug'), # noqa
+        path('incidents/<int:pk>/resolve-debug', ResolveView.as_view(), {'debug_view': True}, name='incident-resolve-debug'), # noqa
     ]

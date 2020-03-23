@@ -219,5 +219,23 @@ Incident {{ incident.id }}: {{ incident.name }}
 
 {% block javascript %}
 {{ block.super }}
-{% include 'tracker/incident_detail_modals.html' %}
+
+{# Modal dialog boxes #}
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $(".incident-change-queue").modalForm({
+      formURL: "{% url 'tracker:incident-change-queue' pk=incident.id %}"
+    });
+
+    $(".incident-change-owner").modalForm({
+      formURL: "{% url 'tracker:incident-change-owner' pk=incident.id %}"
+    });
+
+    $(".incident-resolve").modalForm({
+      formURL: "{% url 'tracker:incident-resolve' pk=incident.id %}"
+    });
+
+  });
+</script>
 {% endblock javascript %}

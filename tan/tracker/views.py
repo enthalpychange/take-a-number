@@ -5,9 +5,6 @@ from django.views.generic import (
     TemplateView,
     DetailView,
     ListView,
-)
-
-from django.views.generic import (
     View,
 )
 
@@ -31,6 +28,24 @@ from .selectors import (
 from .services import (
     update_incident_pre,
 )
+
+
+class ModalContextMixin:
+    """
+    Default context mixin for modal forms to pass extra arguments to the
+    template.
+    """
+    extra_context = None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.setdefault('view', self)
+        context.setdefault('modal_title', 'Update')
+        context.setdefault('submit_button', 'Submit')
+        context['debug_view'] = self.kwargs.get('debug_view', False)
+        if self.extra_context is not None:
+            context.update(self.extra_context)
+        return context
 
 
 class IncidentCreateView(LoginRequiredMixin, BSModalCreateView):
@@ -73,20 +88,28 @@ class IncidentDetailView(LoginRequiredMixin, DetailView):
         return get_incident()
 
 
-class QueueChangeView(LoginRequiredMixin, BSModalUpdateView):
+class QueueChangeView(LoginRequiredMixin, ModalContextMixin, BSModalUpdateView):
     model = Incident
-    template_name = 'tracker/incident_change_queue_form.html'
+    template_name = 'tracker/incident_detail_modal_form.html'
     form_class = QueueChangeForm
+    extra_context = {
+        'modal_title': 'Change Queue',
+        'submit_button': 'Change',
+    }
 
     # Redirect back to incident when queue has changed
     def get_success_url(self):
         return reverse_lazy('tracker:incident-detail', kwargs={'pk': self.object.id})
 
 
-class OwnerChangeView(LoginRequiredMixin, BSModalUpdateView):
+class OwnerChangeView(LoginRequiredMixin, ModalContextMixin, BSModalUpdateView):
     model = Incident
-    template_name = 'tracker/incident_change_owner_form.html'
+    template_name = 'tracker/incident_detail_modal_form.html'
     form_class = OwnerChangeForm
+    extra_context = {
+        'modal_title': 'Change Owner',
+        'submit_button': 'Change',
+    }
 
     # Redirect back to incident when owner has changed
     def get_success_url(self):
@@ -100,10 +123,14 @@ class AssignSelfView(LoginRequiredMixin, View):
         return redirect(reverse_lazy('tracker:incident-detail', kwargs=kwargs))
 
 
-class ResolveView(LoginRequiredMixin, BSModalUpdateView):
+class ResolveView(LoginRequiredMixin, ModalContextMixin, BSModalUpdateView):
     model = Incident
-    template_name = 'tracker/incident_resolve_form.html'
+    template_name = 'tracker/incident_detail_modal_form.html'
     form_class = IncidentResolveForm
+    extra_context = {
+        'modal_title': 'Resolve Ticket',
+        'submit_button': 'Resolve',
+    }
 
     # https://docs.djangoproject.com/en/dev/topics/class-based-views/generic-editing/#models-and-request-user
     def form_valid(self, form):
