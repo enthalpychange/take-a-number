@@ -42,7 +42,7 @@ class ModalContextMixin:
         context.setdefault('view', self)
         context.setdefault('modal_title', 'Update')
         context.setdefault('submit_button', 'Submit')
-        context['debug_view'] = self.kwargs.get('debug_view', False)
+        context['debug_view'] = bool(self.request.GET.get('debug', False))
         if self.extra_context is not None:
             context.update(self.extra_context)
         return context
