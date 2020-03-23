@@ -41,3 +41,9 @@ MIDDLEWARE += LOCAL_MIDDLEWARE # noqa
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+DEBUG_TOOLBAR_CONFIG = {
+    # Redirects Panel is disabled by default
+    # Uncomment to enable Redirects Panel
+    # 'DISABLE_PANELS': {},
+}
