@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
@@ -72,7 +72,7 @@ def set_timezone(request):
             request.session['timezone'] = zone
             # Return a successful response
             # Redirection is handled by JavaScript
-            return HttpResponse(zone)
+            return JsonResponse({'timezone': zone})
 
         except (KeyError, ValueError):
-            return HttpResponseBadRequest
+            return JsonResponse({'error': 'Bad Request'}, status=400)
