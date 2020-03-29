@@ -9,7 +9,7 @@ def set_timezone(request):
         return render(request, 'timezone/set_timezone.html')
     else:
         ZONES = {
-            '0_0': 'Etc/UTC',
+            '0_0': 'UTC',
             '0_60': 'Europe/London',
             '60_60': 'Africa/Lagos',
             '60_120': 'Europe/Paris',
@@ -62,13 +62,12 @@ def set_timezone(request):
             '-600_-600': 'Pacific/Honolulu',
             '-600_-540': 'America/Adak',
             '-660_-660': 'Pacific/Pago_Pago',
-            '-720_-720': 'Etc/GMT+12',
         }
 
         try:
             offset = -int(request.POST['offset'])
             dst_offset = -int(request.POST['dst_offset'])
-            zone = ZONES.get(f'{offset}_{dst_offset}', 'Etc/UTC')
+            zone = ZONES.get(f'{offset}_{dst_offset}', 'UTC')
             request.session['timezone'] = zone
             # Return a successful response
             # Redirection is handled by JavaScript
