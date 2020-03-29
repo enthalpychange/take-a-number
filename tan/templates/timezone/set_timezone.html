@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block navbar_css %}
+<style>
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #004084;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #004084 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+{% endblock navbar_css %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block content %}
+<div class="container text-center">
+  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+{{ block.super }}
+<script>
+// Set timezone
+let today = new Date();
+january = new Date(today.getFullYear(), 0, 1);
+july = new Date(today.getFullYear(), 6, 1);
+let offset = january.getTimezoneOffset();
+let dstOffset = july.getTimezoneOffset();
+$.ajax({
+  type: "POST",
+  url: "{{ request.path }}",
+  data: {offset: offset, dst_offset: dstOffset, csrfmiddlewaretoken: "{{ csrf_token }}"}
+});
+window.location.replace("{{request.GET.next}}");
+</script>
+{% endblock javascript %}

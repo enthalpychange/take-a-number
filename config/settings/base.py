@@ -22,6 +22,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'tan.identity.apps.IdentityConfig',
     'tan.tracker.apps.TrackerConfig',
+    'tan.timezone.apps.TimezoneConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
