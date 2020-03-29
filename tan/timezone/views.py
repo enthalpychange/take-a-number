@@ -70,6 +70,8 @@ def set_timezone(request):
             dst_offset = -int(request.POST['dst_offset'])
             zone = ZONES.get(f'{offset}_{dst_offset}', 'Etc/UTC')
             request.session['timezone'] = zone
+            # Return a successful response
+            # Redirection is handled by JavaScript
             return HttpResponse(zone)
 
         except (KeyError, ValueError):

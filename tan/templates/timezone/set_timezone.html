@@ -52,7 +52,7 @@
 {% block javascript %}
 {{ block.super }}
 <script>
-// Set timezone
+// Set timezone and redirect to next on success
 let today = new Date();
 january = new Date(today.getFullYear(), 0, 1);
 july = new Date(today.getFullYear(), 6, 1);
@@ -61,8 +61,10 @@ let dstOffset = july.getTimezoneOffset();
 $.ajax({
   type: "POST",
   url: "{{ request.path }}",
-  data: {offset: offset, dst_offset: dstOffset, csrfmiddlewaretoken: "{{ csrf_token }}"}
+  data: {offset: offset, dst_offset: dstOffset, csrfmiddlewaretoken: "{{ csrf_token }}"},
+  success: function() {
+    window.location.replace("{{request.GET.next}}");
+  }
 });
-window.location.replace("{{request.GET.next}}");
 </script>
 {% endblock javascript %}
